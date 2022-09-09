@@ -2,7 +2,6 @@ import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-import Section from 'components/ui/Section';
 import { Button, Input, InputError, LabelName } from './ContactForm.styled';
 
 import { getContacts } from 'redux/contacts';
@@ -22,7 +21,7 @@ function ContactForm() {
         message:
           "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
       }),
-    phone: yup
+    number: yup
       .string()
       .required()
       .matches(
@@ -53,32 +52,30 @@ function ContactForm() {
   };
 
   return (
-    <Section>
-      <Formik
-        initialValues={{
-          name: '',
-          phone: '',
-        }}
-        onSubmit={submitHandler}
-        validationSchema={schema}
-      >
-        <Form autoComplete="off">
-          <LabelName>
-            Name
-            <Input name="name" type="text" />
-          </LabelName>
-          <InputError name="name" component="p" />
+    <Formik
+      initialValues={{
+        name: '',
+        number: '',
+      }}
+      onSubmit={submitHandler}
+      validationSchema={schema}
+    >
+      <Form autoComplete="off">
+        <LabelName>
+          Name
+          <Input name="name" type="text" />
+        </LabelName>
+        <InputError name="name" component="p" />
 
-          <LabelName>
-            Number
-            <Input name="phone" type="tel" />
-          </LabelName>
-          <InputError name="phone" component="p" />
+        <LabelName>
+          Number
+          <Input name="number" type="tel" />
+        </LabelName>
+        <InputError name="number" component="p" />
 
-          <Button type="submit">Add contact</Button>
-        </Form>
-      </Formik>
-    </Section>
+        <Button type="submit">Add contact</Button>
+      </Form>
+    </Formik>
   );
 }
 

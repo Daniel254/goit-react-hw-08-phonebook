@@ -14,5 +14,8 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     margin: 0.5em 0;
   }
+  a {
+    color: inherit
+  }
 `;
 export default GlobalStyle;

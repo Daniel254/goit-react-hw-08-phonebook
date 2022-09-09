@@ -1,16 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import {
-  createContactApi,
-  getAllContactsApi,
-  removeContactApi,
-} from 'services/mock-api';
+import connectionsApi from 'services/connectionsApi';
 
 const initialState = {
   items: [],
   filter: '',
   isLoading: false,
-  error: null,
 };
 
 // Async actions
@@ -18,7 +13,7 @@ export const removeContact = createAsyncThunk(
   'contacts/remove',
   async (id, thunkApi) => {
     try {
-      return await removeContactApi(id);
+      return await connectionsApi.removeContact(id);
     } catch (error) {
       toast(error.message, { type: 'error' });
       return thunkApi.rejectWithValue(error.message);
@@ -31,7 +26,7 @@ export const getAllContacts = createAsyncThunk(
   'contacts/getAll',
   async (_, thunkApi) => {
     try {
-      return await getAllContactsApi();
+      return await connectionsApi.getAllContacts();
     } catch (error) {
       toast(error.message, { type: 'error' });
       return thunkApi.rejectWithValue(error.message);
@@ -42,11 +37,11 @@ export const addContact = createAsyncThunk(
   'contacts/add',
   async (contact, thunkApi) => {
     try {
-      await createContactApi(contact);
-      return await getAllContactsApi();
+      await connectionsApi.createContact(contact);
+      return await connectionsApi.getAllContacts();
     } catch (error) {
-      toast(error.message, { type: 'error' });
-      return thunkApi.rejectWithValue(error.message);
+      toast.error(error.response?.data?.message || error.message);
+      return thunkApi.rejectWithValue();
     } finally {
       thunkApi.dispatch(getAllContacts());
     }

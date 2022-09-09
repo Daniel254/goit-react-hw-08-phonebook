@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLoadingStatus, removeContact } from 'redux/contacts';
 import { DeleteBtn, ListItem } from './ContactListItem.styled';
 
-export default function ContactListItem({ id, name, phone }) {
+export default function ContactListItem({ id, name, number }) {
   const dispatch = useDispatch();
   const isLoading = useSelector(getLoadingStatus);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -20,7 +20,7 @@ export default function ContactListItem({ id, name, phone }) {
   return (
     <ListItem>
       {name}: <br />
-      {phone}
+      {number}
       <DeleteBtn onClick={deleteContactHandler} disabled={isDeleting}>
         {isDeleting ? '...' : 'Delete'}
       </DeleteBtn>
