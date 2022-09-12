@@ -1,8 +1,15 @@
 import { Form, Formik } from 'formik';
+import 'react-phone-input-2/lib/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-import { Button, Input, InputError, LabelName } from './ContactForm.styled';
+import {
+  Button,
+  Input,
+  InputError,
+  LabelName,
+  PhInput,
+} from './ContactForm.styled';
 
 import { getContacts } from 'redux/contacts';
 
@@ -60,21 +67,32 @@ function ContactForm() {
       onSubmit={submitHandler}
       validationSchema={schema}
     >
-      <Form autoComplete="off">
-        <LabelName>
-          Name
-          <Input name="name" type="text" />
-        </LabelName>
-        <InputError name="name" component="p" />
+      {({ handleChange, values }) => (
+        <Form autoComplete="off">
+          <LabelName>
+            Name
+            <Input name="name" type="text" />
+          </LabelName>
+          <InputError name="name" component="p" />
 
-        <LabelName>
-          Number
-          <Input name="number" type="tel" />
-        </LabelName>
-        <InputError name="number" component="p" />
+          <LabelName>
+            Number
+            <PhInput
+              inputClass={'test-input-class'}
+              country={'ua'}
+              placeholder={'+380 (50) 123 45 67'}
+              value={values.number}
+              inputProps={{ name: 'number' }}
+              onChange={(phoneNumber, country, e) => {
+                handleChange(e);
+              }}
+            />
+          </LabelName>
+          <InputError name="number" component="p" />
 
-        <Button type="submit">Add contact</Button>
-      </Form>
+          <Button type="submit">Add contact</Button>
+        </Form>
+      )}
     </Formik>
   );
 }

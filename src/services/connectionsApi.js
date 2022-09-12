@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from 'constants/contactsApiConstants';
+import { BASE_URL } from 'constants/contactsApi';
 
 const instance = axios.create({
   baseURL: BASE_URL,

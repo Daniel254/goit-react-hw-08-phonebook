@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import Box from 'components/ui/Box';
+import Container from 'components/ui/Container';
 import GlobalStyle from 'styles/GlobalStyle';
-import Box from './ui/Box';
-import Container from './ui/Container';
 import UserMenu from './UserMenu';
 
 export default function Layout() {
@@ -16,8 +17,9 @@ export default function Layout() {
         <Box as="h1" mx="auto">
           Phonebook
         </Box>
-
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </Container>
       <ToastContainer position="top-center" hideProgressBar={true} />
     </>

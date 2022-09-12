@@ -1,8 +1,26 @@
 import { ErrorMessage, Field } from 'formik';
+import PhoneInput from 'react-phone-input-2';
 import styled from 'styled-components';
 
 export const LabelName = styled.label`
   display: block;
+`;
+
+export const PhInput = styled(PhoneInput)`
+  background: #f2f2f2;
+  margin: 0 0 15px;
+  &.react-tel-input .form-control {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px 15px 15px 50px;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: auto;
+    line-height: 1;
+  }
 `;
 
 export const Input = styled(Field)`

@@ -1,7 +1,7 @@
 import { useAuth } from 'hooks';
 
+import { routes } from 'constants/routes';
 import { Navigate } from 'react-router-dom';
-import { routes } from 'router';
 
 export default function PrivateRoute({ element }) {
   const { isLoggedIn, isFetchingCurrentUser } = useAuth();
@@ -13,11 +13,4 @@ export default function PrivateRoute({ element }) {
   } else {
     return <Navigate to={routes.LOGIN} />;
   }
-
-  // if (isLoggedIn === false &&) {
-  //   return <Navigate to={routes.LOGIN} />;
-  // } else if (isLoggedIn === true) {
-  //   return element;
-  // }
-  // return null;
 }
